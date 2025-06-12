@@ -208,110 +208,725 @@
             padding: 15px;
             margin: 15px 0;
         }
-        
-        .threshold-info h5 {
+          .threshold-info h5 {
             margin: 0 0 10px 0;
             color: #856404;
         }
+        
+        /* 导航栏样式 */
+        .nav-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 0;
+            margin: -30px -30px 30px -30px;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .nav-tab {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            border: 2px solid transparent;
+        }
+        
+        .nav-tab:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .nav-tab.active {
+            background: white;
+            color: #667eea;
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* 标签页内容 */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 快速操作栏 */
+        .quick-actions {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .quick-actions h4 {
+            color: white;
+            margin: 0 0 15px 0;
+            text-align: center;
+        }
+        
+        .quick-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+          .quick-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: 2px solid transparent;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quick-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+        
+        .quick-btn:hover::before {
+            left: 100%;
+        }
+        
+        .quick-btn:hover {
+            background: linear-gradient(135deg, #5a6fd8, #6b4a96);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+        
+        .quick-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }        /* 工具栏 */
+        .toolbar {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.8);
+            transition: all 0.3s ease;
+            min-height: 60px; /* 固定最小高度 */
+        }
+        
+        .toolbar:hover {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+        
+        .toolbar-content {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 20px;
+            min-height: 20px; /* 确保内容区域有最小高度 */
+        }
+          .quick-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 44px; /* 固定高度，即使按钮不存在也保持空间 */
+            align-items: center;
+        }
+        
+        /* 可折叠区域 */
+        .collapsible {
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .collapsible-header {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #dee2e6;
+            transition: all 0.3s;
+        }
+        
+        .collapsible-header:hover {
+            background: linear-gradient(135deg, #e9ecef, #dee2e6);
+        }
+        
+        .collapsible-header h4 {
+            margin: 0;
+            color: #495057;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .collapse-icon {
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+        
+        .collapsible.expanded .collapse-icon {
+            transform: rotate(180deg);
+        }
+        
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: white;
+        }
+        
+        .collapsible.expanded .collapsible-content {
+            max-height: 2000px;
+        }
+        
+        .collapsible-body {
+            padding: 20px;
+        }
+        
+        /* 回到顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        
+        .back-to-top.show {
+            display: flex;
+        }
+          /* 状态指示器 */
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            color: #495057;
+            padding: 8px 16px;
+            background: rgba(248,249,250,0.7);
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.1);
+            height: 50px; /* 固定高度 */
+            min-width: 120px; /* 最小宽度避免文字变化时跳动 */
+        }
+        
+        .status-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #28a745;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 0 4px rgba(40,167,69,0.2);
+        }
+        
+        .status-dot.warning { 
+            background: #ffc107; 
+            box-shadow: 0 0 0 4px rgba(255,193,7,0.2);
+        }
+        
+        .status-dot.error { 
+            background: #dc3545; 
+            box-shadow: 0 0 0 4px rgba(220,53,69,0.2);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+          /* 进度条容器 */
+        .progress-container {
+            min-width: 200px;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+            opacity: 1; /* 始终显示，避免隐藏时布局跳动 */
+            transition: opacity 0.3s ease;
+        }
+        
+        .progress-container.hidden {
+            opacity: 0; /* 通过透明度隐藏而不是display:none */
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, .2) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255, 255, 255, .2) 50%,
+                rgba(255, 255, 255, .2) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 10px 10px;
+            animation: progress-animation 1s linear infinite;
+        }
+        
+        @keyframes progress-animation {
+            0% { background-position: 0 0; }
+            100% { background-position: 10px 10px; }
+        }
+        
+        /* 快速操作栏增强 */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+        
+        .quick-btn {
+            position: relative;
+            overflow: hidden;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .quick-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .quick-btn:active {
+            transform: translateY(1px);
+        }
+        
+        /* 标签页内容增强 */
+        .tab-content {
+            padding: 15px;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 10px;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        /* 模板卡片 */
+        .template-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .template-card:hover {
+            border-color: #007bff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,123,255,0.2);
+        }
+        
+        .template-card.selected {
+            border-color: #007bff;
+            background: #f8f9ff;
+        }
+          /* 响应式设计优化 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            .nav-tab {
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+                font-size: 14px;
+            }
+              .toolbar {
+                padding: 15px;
+                margin: 15px 0;
+                position: static;
+                min-height: 50px; /* 移动端也保持最小高度 */
+            }
+            
+            .toolbar-content {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                text-align: center;
+                min-height: 20px; /* 确保内容区域有最小高度 */
+            }
+              .status-indicator {
+                justify-self: center;
+                min-width: 100px; /* 移动端减小最小宽度 */
+            }
+            
+            .progress-container {
+                min-width: 100%;
+            }
+            
+            .quick-buttons {
+                justify-content: center;
+                gap: 8px;
+            }
+            
+            .quick-btn {
+                padding: 10px 16px;
+                font-size: 13px;
+                flex: 1;
+                min-width: 120px;
+            }
+            
+            .settings {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .template-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .collapsible-header {
+                padding: 12px 15px;
+            }
+            
+            .collapsible-header h4 {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .quick-buttons {
+                flex-direction: column;
+            }
+            
+            .quick-btn {
+                width: 100%;
+                min-width: auto;
+                margin: 2px 0;
+            }
+            
+            .toolbar-content {
+                gap: 12px;
+            }
+              .nav-tab {
+                padding: 10px;
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
-<body>
-    <div class="container">
+<body>    <div class="container">
         <h1>🔍 FindText 图像编码解码器</h1>
-          <div class="section">
-            <h3>📝 输入FindText编码</h3>
-            <textarea id="input-text" placeholder="请粘贴您的FindText编码字符串...">|<>*202$39.zzzzzzzzzzzzzvzzzwzyA0DzbzkU1wwsz0TDbb7wU1wwszw0Dbb7kXtw00w40DU07kU0w00z4F7zbzsW1swwT4ED7bXsUEswwT07b7bXk3ws00QE03003nU0s00Tzzzzzbzzzzzzw</textarea>
-            
-            <div class="button-group">
-                <button onclick="decodeImage()">🔓 解码图像</button>
-                <button onclick="encodeImage()">🔐 编码图像</button>
-                <button onclick="clearAll()">🗑️ 清空</button>
+        
+        <!-- 导航栏 -->
+        <div class="nav-bar">
+            <ul class="nav-tabs">
+                <li class="nav-tab active" data-tab="decode">🔓 解码模式</li>
+                <li class="nav-tab" data-tab="encode">🔐 编码模式</li>
+                <li class="nav-tab" data-tab="tools">🛠️ 工具设置</li>
+                <li class="nav-tab" data-tab="help">❓ 帮助说明</li>
+            </ul>
+        </div>
+          <!-- 工具栏 -->
+        <div class="toolbar">
+            <div class="toolbar-content">
+                <div class="status-indicator">
+                    <div class="status-dot" id="status-dot"></div>
+                    <span id="status-text">就绪</span>
+                </div>
+                <div class="progress-container hidden" id="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div class="quick-buttons">
+                    <button class="quick-btn" onclick="loadExample()">📝 加载示例</button>
+                    <button class="quick-btn" onclick="clearAll()">🗑️ 清空全部</button>
+                    <button class="quick-btn" onclick="downloadResults()">💾 下载结果</button>
+                </div>
             </div>
         </div>
         
-        <div class="section">
-            <h3>🖼️ 上传图像并编码</h3>
-            <div class="upload-area" id="upload-area">
-                <p>📁 拖拽图像文件到此处或点击选择文件</p>
-                <input type="file" id="image-upload" accept="image/*" style="display: none;">
-                <button onclick="document.getElementById('image-upload').click()">选择图像文件</button>
+        <!-- 解码模式 -->
+        <div class="tab-content active" id="decode-tab">
+            <div class="section">
+                <h3>📝 输入FindText编码</h3>
+                <textarea id="input-text" placeholder="请粘贴您的FindText编码字符串...">|<>*202$39.zzzzzzzzzzzzzvzzzwzyA0DzbzkU1wwsz0TDbb7wU1wwszw0Dbb7kXtw00w40DU07kU0w00z4F7zbzsW1swwT4ED7bXsUEswwT07b7bXk3ws00QE03003nU0s00Tzzzzzbzzzzzzw</textarea>
+                
+                <div class="button-group">
+                    <button onclick="decodeImage()">🔓 解码图像</button>
+                    <button onclick="encodeImage()">🔐 重新编码</button>
+                </div>
             </div>
             
-            <div class="settings">
-                <label>
-                    编码阈值: 
-                    <input type="number" id="encode-threshold" value="128" min="0" max="255">
-                    <span style="font-size: 12px; color: #666;">(0-255, 决定黑白分界)</span>
-                </label>
-                <label>
-                    <input type="checkbox" id="auto-resize">
-                    自动调整大小 (最大100x100)
-                </label>
-            </div>
-            
-            <div id="original-image-container" class="canvas-container" style="display: none;">
-                <h4>原始图像:</h4>
-                <canvas id="original-canvas"></canvas>
-                <h4>二值化预览:</h4>
-                <canvas id="preview-canvas"></canvas>
-            </div>
-        </div>
-          <div class="section">
-            <h3>⚙️ 显示设置</h3>
-            <div class="threshold-info">
-                <h5>💡 关于黑白图像说明:</h5>
-                <p>FindText是专门用于图像识别的库，它<strong>只支持黑白二值图像</strong>。这不是配置问题，而是设计如此：</p>
-                <ul>
-                    <li><strong>黑色像素(0)</strong>: 表示需要匹配的图像特征</li>
-                    <li><strong>白色像素(255)</strong>: 表示背景或忽略的区域</li>
-                    <li><strong>阈值</strong>: 用于将彩色/灰度图像转换为黑白图像的分界值</li>
-                </ul>
-            </div>
-            <div class="settings">
-                <label>
-                    放大倍数: 
-                    <input type="number" id="scale" value="15" min="1" max="50">
-                </label>
-                <label>
-                    <input type="checkbox" id="show-grid" checked>
-                    显示网格
-                </label>
-                <label>
-                    <input type="checkbox" id="invert-colors">
-                    反转颜色
-                </label>
-                <button onclick="updateDisplay()">🔄 更新显示</button>
-                <button onclick="downloadPNG()">💾 下载PNG</button>
+            <!-- 预设模板 -->
+            <div class="collapsible" id="templates-section">
+                <div class="collapsible-header" onclick="toggleCollapse('templates-section')">
+                    <h4>📋 常用编码模板</h4>
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-body">
+                        <div class="template-grid" id="template-grid">
+                            <!-- 模板将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
+        <!-- 编码模式 -->
+        <div class="tab-content" id="encode-tab">
+            <div class="section">
+                <h3>🖼️ 上传图像并编码</h3>
+                <div class="upload-area" id="upload-area">
+                    <p>📁 拖拽图像文件到此处或点击选择文件</p>
+                    <input type="file" id="image-upload" accept="image/*" style="display: none;">
+                    <button onclick="document.getElementById('image-upload').click()">选择图像文件</button>
+                </div>
+                
+                <div class="settings">
+                    <label>
+                        编码阈值: 
+                        <input type="number" id="encode-threshold" value="128" min="0" max="255">
+                        <span style="font-size: 12px; color: #666;">(0-255, 决定黑白分界)</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="auto-resize" checked>
+                        自动调整大小 (最大100x100)
+                    </label>
+                </div>
+                
+                <div id="original-image-container" class="canvas-container" style="display: none;">
+                    <h4>原始图像:</h4>
+                    <canvas id="original-canvas"></canvas>
+                    <h4>二值化预览:</h4>
+                    <canvas id="preview-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 工具设置 -->
+        <div class="tab-content" id="tools-tab">
+            <div class="section">
+                <h3>⚙️ 显示设置</h3>
+                <div class="settings">
+                    <label>
+                        放大倍数: 
+                        <input type="number" id="scale" value="15" min="1" max="50">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="show-grid" checked>
+                        显示网格
+                    </label>
+                    <label>
+                        <input type="checkbox" id="invert-colors">
+                        反转颜色
+                    </label>
+                    <button onclick="updateDisplay()">🔄 更新显示</button>
+                    <button onclick="downloadPNG()">💾 下载PNG</button>
+                </div>
+            </div>
+            
+            <!-- 高级设置 -->
+            <div class="collapsible" id="advanced-settings">
+                <div class="collapsible-header" onclick="toggleCollapse('advanced-settings')">
+                    <h4>🔧 高级设置</h4>
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-body">
+                        <div class="settings">
+                            <label>
+                                输出格式:
+                                <select id="output-format">
+                                    <option value="findtext">FindText编码</option>
+                                    <option value="binary">二进制字符串</option>
+                                    <option value="hex">十六进制</option>
+                                </select>
+                            </label>
+                            <label>
+                                压缩级别:
+                                <select id="compression">
+                                    <option value="none">无压缩</option>
+                                    <option value="light">轻度压缩</option>
+                                    <option value="heavy">重度压缩</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 帮助说明 -->
+        <div class="tab-content" id="help-tab">
+            <div class="section">
+                <h3>💡 关于FindText编码</h3>
+                <div class="threshold-info">
+                    <h5>🎯 FindText是什么？</h5>
+                    <p>FindText是专门用于图像识别的AutoHotkey库，它<strong>只支持黑白二值图像</strong>。这不是配置问题，而是设计如此：</p>
+                    <ul>
+                        <li><strong>黑色像素(0)</strong>: 表示需要匹配的图像特征</li>
+                        <li><strong>白色像素(255)</strong>: 表示背景或忽略的区域</li>
+                        <li><strong>阈值</strong>: 用于将彩色/灰度图像转换为黑白图像的分界值</li>
+                    </ul>
+                </div>
+                
+                <div class="collapsible" id="usage-guide">
+                    <div class="collapsible-header" onclick="toggleCollapse('usage-guide')">
+                        <h4>📖 使用指南</h4>
+                        <span class="collapse-icon">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="collapsible-body">
+                            <h5>🔍 解码步骤：</h5>
+                            <ol>
+                                <li>将FindText编码字符串粘贴到输入框</li>
+                                <li>点击"解码图像"按钮</li>
+                                <li>查看解码结果和图像预览</li>
+                                <li>调整显示设置查看不同效果</li>
+                            </ol>
+                            
+                            <h5>🔐 编码步骤：</h5>
+                            <ol>
+                                <li>切换到"编码模式"标签</li>
+                                <li>上传图像文件或拖拽到上传区域</li>
+                                <li>调整阈值参数查看二值化效果</li>
+                                <li>复制生成的编码字符串</li>
+                            </ol>
+                            
+                            <h5>⚙️ 阈值设置建议：</h5>
+                            <ul>
+                                <li><strong>文字/图标</strong>: 阈值 100-150</li>
+                                <li><strong>照片</strong>: 阈值 120-180</li>
+                                <li><strong>高对比度图像</strong>: 阈值 80-120</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 信息面板 -->
         <div id="info-panel" class="info-panel" style="display: none;">
             <h4>📊 图像信息</h4>
             <div id="image-info"></div>
         </div>
         
-        <div id="ascii-section" class="section" style="display: none;">
-            <h3>🖼️ ASCII预览</h3>
-            <div id="ascii-preview" class="ascii-preview"></div>
-        </div>
-        
-        <div class="section">
-            <h3>🎨 图像显示</h3>
-            <div id="canvas-container" class="canvas-container">
-                <p>请先输入编码字符串并点击解码</p>
+        <!-- ASCII预览 -->
+        <div id="ascii-section" class="collapsible" style="display: none;">
+            <div class="collapsible-header" onclick="toggleCollapse('ascii-section')">
+                <h4>🖼️ ASCII预览</h4>
+                <span class="collapse-icon">▼</span>
+            </div>
+            <div class="collapsible-content">
+                <div class="collapsible-body">
+                    <div id="ascii-preview" class="ascii-preview"></div>
+                </div>
             </div>
         </div>
         
+        <!-- 图像显示 -->
+        <div class="section">
+            <h3>🎨 图像显示</h3>
+            <div id="canvas-container" class="canvas-container">
+                <p>请先输入编码字符串并点击解码，或上传图像文件进行编码</p>
+            </div>
+        </div>
+        
+        <!-- 输出结果 -->
         <div class="section">
             <h3>📤 输出结果</h3>
             <textarea id="output-text" placeholder="解码或编码结果将显示在这里..." readonly></textarea>
             <div class="button-group">
                 <button onclick="copyToClipboard()">📋 复制结果</button>
+                <button onclick="saveToFile()">💾 保存到文件</button>
             </div>
         </div>
         
         <div id="message" style="display: none;"></div>
     </div>
+    
+    <!-- 回到顶部按钮 -->
+    <button class="back-to-top" id="back-to-top" onclick="scrollToTop()">↑</button>
 
     <script>
         // FindText解码器类
@@ -575,9 +1190,48 @@
                 ctx.putImageData(imgData, 0, 0);
                 return canvas;
             }
-        }
+        }        const decoder = new FindTextDecoder();
+        let currentTab = 'decode';
 
-        const decoder = new FindTextDecoder();
+        // 预设模板数据
+        const templates = [
+            {
+                name: "确认按钮",
+                code: "|<>*202$39.zzzzzzzzzzzzzvzzzwzyA0DzbzkU1wwsz0TDbb7wU1wwszw0Dbb7kXtw00w40DU07kU0w00z4F7zbzsW1swwT4ED7bXsUEswwT07b7bXk3ws00QE03003nU0s00Tzzzzzbzzzzzzw",
+                description: "游戏中常见的确认按钮"
+            },
+            {
+                name: "关闭按钮",
+                code: "|<>*150$20.zzzzzzzzzzzy03w07k0Tk1z03w07k0Tk1y03w07zzzzzzzz",
+                description: "窗口右上角关闭按钮"
+            },
+            {
+                name: "开始按钮",
+                code: "|<>*180$60.zzzzzzzzzzzzzzzzzzzw00003zzzk0000Tzzs0001zzy00007zzU0001zzw00007zz00001zzs00007zy00001zzU00007zw00001zz00000zy00000zw00000zU00000z000000y",
+                description: "游戏开始按钮"
+            }
+        ];
+
+        function updateStatus(message, type = 'success') {
+            const statusDot = document.getElementById('status-dot');
+            const statusText = document.getElementById('status-text');
+            
+            statusDot.className = `status-dot ${type}`;
+            statusText.textContent = message;
+        }        function updateProgress(percent) {
+            const progressBar = document.getElementById('progress-bar');
+            const progressContainer = document.getElementById('progress-container');
+            
+            if (percent <= 0) {
+                // 进度完成后，渐隐进度条但保持容器空间
+                progressContainer.classList.add('hidden');
+                progressBar.style.width = '0%';
+            } else {
+                // 显示进度条
+                progressContainer.classList.remove('hidden');
+                progressBar.style.width = percent + '%';
+            }
+        }
 
         function showMessage(message, type = 'info') {
             const messageDiv = document.getElementById('message');
@@ -590,17 +1244,133 @@
             }, 3000);
         }
 
-        function decodeImage() {
+        // 标签页切换
+        function switchTab(tabName) {
+            // 隐藏所有标签页内容
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 移除所有标签的激活状态
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 显示当前标签页
+            document.getElementById(tabName + '-tab').classList.add('active');
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            
+            currentTab = tabName;
+            updateStatus(`切换到${getTabDisplayName(tabName)}模式`);
+        }
+
+        function getTabDisplayName(tabName) {
+            const names = {
+                'decode': '解码',
+                'encode': '编码',
+                'tools': '工具',
+                'help': '帮助'
+            };
+            return names[tabName] || tabName;
+        }
+
+        // 可折叠区域
+        function toggleCollapse(elementId) {
+            const element = document.getElementById(elementId);
+            element.classList.toggle('expanded');
+        }
+
+        // 模板功能
+        function generateTemplates() {
+            const templateGrid = document.getElementById('template-grid');
+            templateGrid.innerHTML = '';
+            
+            templates.forEach((template, index) => {
+                const card = document.createElement('div');
+                card.className = 'template-card';
+                card.innerHTML = `
+                    <h5>${template.name}</h5>
+                    <p style="font-size: 12px; color: #666;">${template.description}</p>
+                    <div style="font-family: monospace; font-size: 10px; color: #999; margin-top: 5px;">
+                        ${template.code.substring(0, 30)}...
+                    </div>
+                `;
+                card.onclick = () => loadTemplate(index);
+                templateGrid.appendChild(card);
+            });
+        }
+
+        function loadTemplate(index) {
+            const template = templates[index];
+            document.getElementById('input-text').value = template.code;
+            
+            // 移除其他选中状态
+            document.querySelectorAll('.template-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // 选中当前模板
+            document.querySelectorAll('.template-card')[index].classList.add('selected');
+            
+            showMessage(`已加载模板: ${template.name}`, 'success');
+            
+            // 自动切换到解码模式并解码
+            switchTab('decode');
+            setTimeout(() => {
+                decodeImage();
+            }, 100);
+        }
+
+        function loadExample() {
+            loadTemplate(0);
+        }
+
+        // 回到顶部功能
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function downloadResults() {
+            const outputText = document.getElementById('output-text').value;
+            if (!outputText) {
+                showMessage('没有可下载的结果', 'error');
+                return;
+            }
+            
+            const blob = new Blob([outputText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'findtext_result.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showMessage('结果已下载', 'success');
+        }
+
+        function saveToFile() {
+            downloadResults();
+        }        function decodeImage() {
             try {
+                updateProgress(20);
+                updateStatus('正在解码...', 'warning');
+                
                 const inputText = document.getElementById('input-text').value.trim();
                 if (!inputText) {
                     showMessage('请输入编码字符串', 'error');
+                    updateStatus('解码失败', 'error');
+                    updateProgress(0);
                     return;
                 }
 
+                updateProgress(50);
                 const imageData = decoder.decode(inputText);
                 decoder.currentImageData = imageData;
 
+                updateProgress(70);
                 // 显示图像信息
                 const infoPanel = document.getElementById('info-panel');
                 const imageInfo = document.getElementById('image-info');
@@ -618,13 +1388,21 @@
                 const asciiPreview = document.getElementById('ascii-preview');
                 asciiPreview.textContent = decoder.toASCII(imageData);
                 asciiSection.style.display = 'block';
+                asciiSection.classList.add('expanded'); // 自动展开
 
+                updateProgress(90);
                 // 更新显示
                 updateDisplay();
 
+                updateProgress(100);
+                updateStatus('解码完成', 'success');
                 showMessage('解码成功！', 'success');
+                
+                setTimeout(() => updateProgress(0), 1000);
 
             } catch (error) {
+                updateProgress(0);
+                updateStatus('解码失败', 'error');
                 showMessage(error.message, 'error');
                 console.error('解码错误:', error);
             }
@@ -681,15 +1459,22 @@
                 decoder.downloadPNG(canvas, 'findtext_decoded.png');
                 showMessage('PNG图像已下载', 'success');
             }
-        }
-
-        function clearAll() {
+        }        function clearAll() {
             document.getElementById('input-text').value = '';
             document.getElementById('output-text').value = '';
-            document.getElementById('canvas-container').innerHTML = '<p>请先输入编码字符串并点击解码</p>';
+            document.getElementById('canvas-container').innerHTML = '<p>请先输入编码字符串并点击解码，或上传图像文件进行编码</p>';
             document.getElementById('info-panel').style.display = 'none';
             document.getElementById('ascii-section').style.display = 'none';
+            document.getElementById('original-image-container').style.display = 'none';
+            
+            // 清除模板选中状态
+            document.querySelectorAll('.template-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
             decoder.currentImageData = null;
+            updateStatus('已清空所有内容', 'success');
+            updateProgress(0);
             showMessage('已清空所有内容', 'success');
         }
 
@@ -707,7 +1492,59 @@
         }        // 页面加载时自动解码示例
         window.onload = function() {
             setupImageUpload();
+            generateTemplates();
+            setupEventListeners();
+            setupScrollHandler();
+            updateStatus('就绪');
         };
+
+        function setupEventListeners() {
+            // 标签页切换
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabName = tab.getAttribute('data-tab');
+                    switchTab(tabName);
+                });
+            });
+            
+            // 键盘快捷键
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey) {
+                    switch(e.key) {
+                        case '1':
+                            e.preventDefault();
+                            switchTab('decode');
+                            break;
+                        case '2':
+                            e.preventDefault();
+                            switchTab('encode');
+                            break;
+                        case '3':
+                            e.preventDefault();
+                            switchTab('tools');
+                            break;
+                        case 'Enter':
+                            e.preventDefault();
+                            if (currentTab === 'decode') {
+                                decodeImage();
+                            }
+                            break;
+                    }
+                }
+            });
+        }
+
+        function setupScrollHandler() {
+            const backToTop = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
+        }
 
         function setupImageUpload() {
             const uploadArea = document.getElementById('upload-area');
@@ -764,15 +1601,18 @@
             if (file && file.type.startsWith('image/')) {
                 await handleImageFile(file);
             }
-        }
-
-        async function handleImageFile(file) {
+        }        async function handleImageFile(file) {
             try {
+                updateProgress(10);
+                updateStatus('正在处理图像...', 'warning');
                 showMessage('正在处理图像...', 'info');
                 
                 const threshold = parseInt(document.getElementById('encode-threshold').value) || 128;
+                
+                updateProgress(30);
                 const imageData = await decoder.createImageDataFromFile(file, threshold);
                 
+                updateProgress(50);
                 // 显示原始图像
                 const originalCanvas = document.getElementById('original-canvas');
                 const originalCtx = originalCanvas.getContext('2d');
@@ -780,6 +1620,7 @@
                 originalCanvas.height = imageData.originalCanvas.height;
                 originalCtx.drawImage(imageData.originalCanvas, 0, 0);
                 
+                updateProgress(70);
                 // 显示二值化预览
                 const previewCanvas = document.getElementById('preview-canvas');
                 const binaryPreview = decoder.createBinaryPreview(imageData);
@@ -791,6 +1632,7 @@
                 // 显示容器
                 document.getElementById('original-image-container').style.display = 'block';
                 
+                updateProgress(80);
                 // 编码为FindText格式
                 const encoded = decoder.encode(imageData, threshold);
                 document.getElementById('output-text').value = encoded;
@@ -798,6 +1640,7 @@
                 // 更新当前图像数据以供解码显示
                 decoder.currentImageData = imageData;
                 
+                updateProgress(90);
                 // 显示图像信息
                 const infoPanel = document.getElementById('info-panel');
                 const imageInfo = document.getElementById('image-info');
@@ -816,13 +1659,20 @@
                 const asciiPreview = document.getElementById('ascii-preview');
                 asciiPreview.textContent = decoder.toASCII(imageData);
                 asciiSection.style.display = 'block';
+                asciiSection.classList.add('expanded'); // 自动展开
                 
                 // 更新显示
                 updateDisplay();
                 
+                updateProgress(100);
+                updateStatus('编码完成', 'success');
                 showMessage(`图像编码成功！尺寸: ${imageData.width}x${imageData.height}`, 'success');
                 
+                setTimeout(() => updateProgress(0), 1000);
+                
             } catch (error) {
+                updateProgress(0);
+                updateStatus('编码失败', 'error');
                 showMessage('图像处理失败: ' + error.message, 'error');
                 console.error('图像处理错误:', error);
             }
