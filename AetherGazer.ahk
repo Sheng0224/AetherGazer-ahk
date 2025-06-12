@@ -469,12 +469,29 @@ Press2()
 			Click, 1000, 692
 			Sleep, 500
 			Send,   {Enter}
-			Text:="|<>*202$39.zzzzzzzzzzzzzvzzzwzyA0DzbzkU1wwsz0TDbb7wU1wwszw0Dbb7kXtw00w40DU07kU0w00z4F7zbzsW1swwT4ED7bXsUEswwT07b7bXk3ws00QE03003nU0s00Tzzzzzbzzzzzzw"
-			ok:=FindText(X:="wait", Y:=-1, 0,0,0,0,0,0,Text)
-			if (ok:=FindText(X, Y, 1183-150000, 803-150000, 1183+150000, 803+150000, 0, 0, Text))
-			{
-				FindText().Click(X, Y, "L")
-			}
+      Text := "|<>*202$39.zzzzzzzzzzzzzvzzzwzyA0DzbzkU1wwsz0TDbb7wU1wwszw0Dbb7kXtw00w40DU07kU0w00z4F7zbzsW1swwT4ED7bXsUEswwT07b7bXk3ws00QE03003nU0s00Tzzzzzbzzzzzzw"
+
+      ; 首次查找（等待模式，设置5秒超时）
+      ok := FindText(X:="wait", Y:=5000, 0, 0, 0, 0, 0, 0, Text)
+
+      if (ok)
+      {
+          ; 进行精确定位
+          if (FindText(X, Y, 1183-150000, 803-150000, 1183+150000, 803+150000, 0, 0, Text))
+          {
+              FindText().Click(X, Y, "L")
+          }
+          else
+          {
+              ; 第一次找到但第二次精确定位失败，使用第一次的坐标
+              FindText().Click(X, Y, "L")
+          }
+      }
+      else
+      {
+          ; 超时未找到，执行备用操作
+          Send, {G}
+      }
 			Sleep, 1000
 		}
 	}
