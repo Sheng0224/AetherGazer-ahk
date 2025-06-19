@@ -1,6 +1,6 @@
 ; ----------------------------------------------------------------------------
 ; Script Name: 深空之眼
-; Version: 3.0
+; Version: 3.1
 ; Author: qstdnx
 ; Contact: https://github.com/qstdnx/AetherGazer-ahk/issues
 ; ----------------------------------------------------------------------------
@@ -29,6 +29,10 @@ if !A_IsAdmin  ; 如果不是管理员权限
 
 ;------------------------------------------------设置 ↓↓↓
 ; 初始化快捷键
+global UPKey := "w"
+global DOWNKey := "s"
+global LEFTKey := "a"
+global RIGHTKey := "d"
 global AttackKey := "j"
 global Skill1Key := "u"
 global Skill2Key := "i"
@@ -47,12 +51,18 @@ global KaorouKey := "Numpad7"
 global LiandianKey := "Numpad9"
 global FantianKey := "^Numpad1"
 global ShikoudiKey := "^Numpad2"
+global FengqianfangtiangouKey := "^Numpad3"
+global YalishaKey := "^Numpad4"
 global StopscriptKey := "Numpad0"
 global ScriptDir := A_ScriptDir
 IniFilePath := ScriptDir . "\settings.ini"
 
 ; 定义所有需要检查的键值对
-KeyMappings := { "AttackKey": AttackKey
+KeyMappings := { "UpKey": UPKey
+  , "DownKey": DOWNKey
+	, "LeftKey": LEFTKey
+	, "RightKey": RIGHTKey
+  , "AttackKey": AttackKey
 	, "Skill1Key": Skill1Key
 	, "Skill2Key": Skill2Key
 	, "Skill3Key": Skill3Key
@@ -70,6 +80,8 @@ KeyMappings := { "AttackKey": AttackKey
 	, "LiandianKey": LiandianKey
 	, "FantianKey": FantianKey
 	, "ShikoudiKey": ShikoudiKey
+	, "FengqianfangtiangouKey": FengqianfangtiangouKey
+  , "YalishaKey": YalishaKey
 	, "StopscriptKey": StopscriptKey }
 
 ; 检查INI文件是否存在，不存在则创建
@@ -102,6 +114,8 @@ Hotkey, %KaorouKey%, Kaorou
 Hotkey, %LiandianKey%, Liandian
 Hotkey, %FantianKey%, Fantian
 Hotkey, %ShikoudiKey%, Shikoudi
+Hotkey, %FengqianfangtiangouKey%, Fengqianfangtiangou
+Hotkey, %YalishaKey%, Yalisha
 Hotkey, %StopscriptKey%, Stopscript
 
 Menu, Tray, NoStandard
@@ -110,44 +124,61 @@ Menu, Tray, Add, 退出程序, ExitScript
 ShowSettingsGUI() {
 	global
 	Gui, New
-	Gui, Add, Text,, 普攻快捷键:
+  Gui, Add, Tab3,,按键设置|自动操作
+  GUI, Tab, 按键设置
+  Gui, Add, Text,, 设置与你游戏内按键对应
+  Gui, Add, Text,, 移动（前）
+  Gui, Add, Hotkey, vUpKey, %UpKey%
+  Gui, Add, Text,, 移动（后）
+  Gui, Add, Hotkey, vDownKey, %DownKey%
+  Gui, Add, Text,, 移动（左）
+  Gui, Add, Hotkey, vLeftKey, %LeftKey%
+  Gui, Add, Text,, 移动（右）
+  Gui, Add, Hotkey, vRightKey, %RightKey%
+	Gui, Add, Text,, 普攻
 	Gui, Add, Hotkey, vAttackKey, %AttackKey%
-	Gui, Add, Text,, 1 技能快捷键:
+	Gui, Add, Text,, 1 技能
 	Gui, Add, Hotkey, vSkill1Key, %Skill1Key%
-	Gui, Add, Text,, 2 技能快捷键:
+	Gui, Add, Text,, 2 技能
 	Gui, Add, Hotkey, vSkill2Key, %Skill2Key%
-	Gui, Add, Text,, 3 技能快捷键:
+	Gui, Add, Text,, 3 技能
 	Gui, Add, Hotkey, vSkill3Key, %Skill3Key%
-	Gui, Add, Text,, 闪避快捷键:
+	Gui, Add, Text,, 闪避
 	Gui, Add, Hotkey, vDodgeKey, %DodgeKey%
-	Gui, Add, Text,, 奥义快捷键:
+	Gui, Add, Text,, 奥义
 	Gui, Add, Hotkey, vUltimateKey, %UltimateKey%
-	Gui, Add, Text,, 队友1 奥义快捷键:
+	Gui, Add, Text,, 队友1 奥义
 	Gui, Add, Hotkey, vTeammate1Key, %Teammate1Key%
-	Gui, Add, Text,, 队友2 奥义快捷键:
+	Gui, Add, Text,, 队友2 奥义
 	Gui, Add, Hotkey, vTeammate2Key, %Teammate2Key%
-	Gui, Add, Text,, 金乌自动战斗快捷键:
+  Gui, tab, 自动操作
+	Gui, Add, Text,, 金乌
 	Gui, Add, Hotkey, vJinwuKey, %JinwuKey%
-	Gui, Add, Text,, 自动多维变量快捷键:
+	Gui, Add, Text,, 自动多维变量
 	Gui, Add, Hotkey, vDimensionKey, %DimensionKey%
-	Gui, Add, Text,, 陵光自动战斗快捷键:
+	Gui, Add, Text,, 陵光
 	Gui, Add, Hotkey, vLingguangKey, %LingguangKey%
-	Gui, Add, Text,, 托特/哈迪斯/雷前鬼/水姆`n自动战斗快捷键:
+	Gui, Add, Text,, 托特/哈迪斯/雷前鬼/水姆
 	Gui, Add, Hotkey, vTuoteKey, %TuoteKey%
-	Gui, Add, Text,, 娜美自动战斗快捷键:
+	Gui, Add, Text,, 娜美
 	Gui, Add, Hotkey, vNameiKey, %NameiKey%
-	Gui, Add, Text,, 薇儿/光赫拉/瓦吉特`n自动战斗快捷键:
+	Gui, Add, Text,, 薇儿/光赫拉/瓦吉特/执明
 	Gui, Add, Hotkey, vWeierKey, %WeierKey%
-	Gui, Add, Text,, 自动烤肉快捷键:
+	Gui, Add, Text,, 自动烤肉
 	Gui, Add, Hotkey, vKaorouKey, %KaorouKey%
-	Gui, Add, Text,, 简易连点器快捷键:
+	Gui, Add, Text,, 简易连点器
 	Gui, Add, Hotkey, vLiandianKey, %LiandianKey%
-	Gui, Add, Text,, 梵天自动战斗快捷键:
+	Gui, Add, Text,, 梵天
 	Gui, Add, Hotkey, vFantianKey, %FantianKey%
-	Gui, Add, Text,, 诗寇蒂自动战斗快捷键:
+	Gui, Add, Text,, 诗寇蒂
 	Gui, Add, Hotkey, vShikoudiKey, %ShikoudiKey%
-	Gui, Add, Text,, 停止脚本快捷键:
+	Gui, Add, Text,, 樱切（左线）
+	Gui, Add, Hotkey, vFengqianfangtiangouKey, %FengqianfangtiangouKey%
+  Gui, Add, Text,, 亚莉莎（左线）
+	Gui, Add, Hotkey, vYalishaKey, %YalishaKey%
+	Gui, Add, Text,, 停止脚本
 	Gui, Add, Hotkey, vStopscriptKey, %StopscriptKey%
+  Gui, Tab
 	Gui, Add, Button, default, OK
 	Gui, Show, , 设置快捷键
 	return
@@ -181,7 +212,9 @@ ButtonOK:
 	Hotkey, %LiandianKey%, Liandian
 	Hotkey, %FantianKey%, Fantian
 	Hotkey, %ShikoudiKey%, Shikoudi
-	Hotkey, %StopscriptKey%, Stopscript
+	Hotkey, %FengqianfangtiangouKey%, Fengqianfangtiangou
+  Hotkey, %YalishaKey%, Yalisha
+  Hotkey, %StopscriptKey%, Stopscript
 
 return
 
@@ -673,7 +706,7 @@ Weier:
 			{
 				Sleep 100
 				SetTimer, Press6, 10  ;
-				ToolTip, 薇儿/光赫拉/瓦吉特：启动, 74, 1021
+				ToolTip, 薇儿/光赫拉/瓦吉特/执明：启动, 74, 1021
 			}
 		}
 	}
@@ -895,7 +928,7 @@ Fantian:
 Press11:
 	if WinActive("ahk_exe AetherGazer.exe") or WinActive("ahk_exe AetherGazer_Bili.exe")
 	{
-		if (GetColor(898, 681)!=="0xFFFFFF" and GetColor(1218, 681)=="0xFFFFFF")
+		if (GetColor(1218, 681)=="0xFFFFFF" and GetColor(910, 683)!=="0xFFFFFF")
 		{
 			Send, {%DodgeKey% Down}
 			Sleep, 500
@@ -957,7 +990,6 @@ Press12:
 		if (!WinActive("ahk_exe AetherGazer.exe") and !WinActive("ahk_exe AetherGazer_Bili.exe") or !12_Enable)
 		{
 			ToolTip
-			12_Enable := false
 			break  ; 退出循环
 		}
 		; 优先检测技能3
@@ -993,18 +1025,153 @@ Press12:
 		Sleep, 10
 
 	}
+
+;------------------------------------------------樱切（左线）自动战斗,Ctrl+小键盘3启动 ↓↓↓
+13_Enable= false
+#If WinActive("ahk_exe AetherGazer.exe") || WinActive("ahk_exe AetherGazer_Bili.exe")
+Fengqianfangtiangou:	
+  {
+		if WinActive("ahk_exe AetherGazer.exe") or WinActive("ahk_exe AetherGazer_Bili.exe")
+		{
+			13_Enable :=!13_Enable
+			if (13_Enable=false)
+			{
+				ToolTip
+			}
+			else
+			{
+				Sleep 100
+				ToolTip, 樱切（左线）：启动, 74, 1021
+				gosub, Press13
+			}
+		}
+	}
+
+Press13:
+	loop
+	{
+		if (!WinActive("ahk_exe AetherGazer.exe") and !WinActive("ahk_exe AetherGazer_Bili.exe") or !13_Enable)
+		{
+			ToolTip
+			break  ; 退出循环
+		}
+		; 检测1技能是否为樱弥状态，如果是，按3次1技能，然后按3次普攻,按3次2技能，然后按3次普攻,最后按3技能，退出樱弥状态
+		if (GetColor(1042, 682)=="0xFFFFFF")
+		{
+			Send, {%Skill1Key%}
+			Sleep, 500
+			Send, {%Skill1Key%}
+			Sleep, 500
+			Send, {%Skill1Key%}
+			Sleep, 500
+			Send, {%AttackKey%}
+			Sleep, 500
+			Send, {%AttackKey%}
+			Sleep, 500
+			Send, {%AttackKey%}	
+      Sleep, 500
+			Send, {%Skill2Key%}
+			Sleep, 500
+			Send, {%Skill2Key%}
+			Sleep, 500
+			Send, {%Skill2Key%}
+			Sleep, 500
+			Send, {%AttackKey%}
+			Sleep, 500
+			Send, {%AttackKey%}
+			Sleep, 500
+			Send, {%AttackKey%}	
+      Sleep, 500
+      Send, {%Skill3Key%}
+		}
+		; 检测是否在樱弥状态，如果不是，常规出招
+    if (GetColor(1042, 682)!="0xFFFFFF" and GetColor(1154, 699)!="0xFFFFFF")
+		{
+			Send, {%Skill1Key%}
+			Sleep, 10
+			Send, {%Skill2Key%}
+			Sleep, 10
+			Send, {%Skill3Key%}
+			Sleep, 10
+			Send, {%UltimateKey%}
+			Sleep, 10
+			Send, {%AttackKey%}
+			Sleep, 10
+			Send, {%Teammate1Key%}
+			Sleep, 10
+			Send, {%Teammate2Key%}
+			Sleep, 10
+			Send, {%AttackKey%}
+		}
+		
+	}
+;---------------------------------------------亚莉莎自动战斗,Ctrl+小键盘4启动 ↓↓↓
+14_Enable= false
+#If WinActive("ahk_exe AetherGazer.exe") || WinActive("ahk_exe AetherGazer_Bili.exe")
+Yalisha:  
+  {
+		if WinActive("ahk_exe AetherGazer.exe") or WinActive("ahk_exe AetherGazer_Bili.exe")
+		{
+			14_Enable :=!14_Enable
+			if (14_Enable=false)
+			{
+				ToolTip
+			}
+			else
+			{
+				Sleep 100
+				ToolTip, 亚莉莎（左线）：启动, 74, 1021
+				gosub, Press14
+			}
+		}
+	}
+
+Press14:
+  loop
+  {
+    if (!WinActive("ahk_exe AetherGazer.exe") and !WinActive("ahk_exe AetherGazer_Bili.exe") or !14_Enable)
+    {
+      ToolTip
+      break  ; 退出循环
+    }
+    ; 检测是否处于枪械模式，如果否，按前进+闪避长按进入枪械模式
+    if (GetColor(1145, 672)!="0xFFFFFF" )
+    {
+      Send, {%UpKey% Down}
+      Send, {%DodgeKey% Down}
+      Sleep, 500
+      Send, {%DodgeKey% Up}
+      Send, {%UpKey% Up}
+    }
+    ; 否则，开枪
+    else
+    {
+      Send, {%AttackKey%}
+      Sleep, 10
+      Send, {%UltimateKey%}
+			Sleep, 10
+			Send, {%AttackKey%}
+			Sleep, 10
+			Send, {%Teammate1Key%}
+			Sleep, 10
+			Send, {%Teammate2Key%}
+    }
+  }
 ;------------------------------------------------强制停止脚本，小键盘0↓↓↓
 Stopscript:
 	Reload
-	; 1_Enable= False
-	; 2_Enable= False
-	; 3_Enable= False
-	; 4_Enable= False
-	; 5_Enable= False
-	; 6_Enable= False
-	; 7_Enable= False
-	; 9_Enable= False
-	; 11_Enable= False
+	1_Enable= False
+	2_Enable= False
+	3_Enable= False
+	4_Enable= False
+	5_Enable= False
+	6_Enable= False
+	7_Enable= False
+	9_Enable= False
+	11_Enable= False
+	12_Enable= False
+	13_Enable= False
+  14_Enable= False
 return
 ;------------------------------------------------退出脚本↓↓↓
 ExitScript:
