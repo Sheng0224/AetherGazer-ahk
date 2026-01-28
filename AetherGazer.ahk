@@ -53,6 +53,7 @@ global FantianKey := "^Numpad1"
 global ShikoudiKey := "^Numpad2"
 global FengqianfangtiangouKey := "^Numpad3"
 global YalishaKey := "^Numpad4"
+global PauseKey := "Esc"
 global StopscriptKey := "Numpad0"
 global ScriptDir := A_ScriptDir
 IniFilePath := ScriptDir . "\settings.ini"
@@ -82,6 +83,7 @@ KeyMappings := { "UpKey": UPKey
 	, "ShikoudiKey": ShikoudiKey
 	, "FengqianfangtiangouKey": FengqianfangtiangouKey
   , "YalishaKey": YalishaKey
+	, "PauseKey": PauseKey
 	, "StopscriptKey": StopscriptKey }
 
 ; 检查INI文件是否存在，不存在则创建
@@ -151,6 +153,8 @@ ShowSettingsGUI() {
 	Gui, Add, Hotkey, vTeammate1Key, %Teammate1Key%
 	Gui, Add, Text,, 队友2 奥义
 	Gui, Add, Hotkey, vTeammate2Key, %Teammate2Key%
+	Gui, Add, Text,, 战斗暂停
+	Gui, Add, Hotkey, vPauseKey, %PauseKey%
   Gui, tab, 自动操作
 	Gui, Add, Text,, 金乌
 	Gui, Add, Hotkey, vJinwuKey, %JinwuKey%
@@ -513,9 +517,10 @@ Press2()
       Click, 745, 643
 			Sleep, 1000
 			;退出
-			Send, {Alt}
-			Sleep, 500
-			Click, 1229, 74
+			; Send, {Alt}
+			; Sleep, 500
+			; Click, 1229, 74
+      Send, {%PauseKey%}
 			Sleep, 500
 			Click, 1000, 692
 			Sleep, 500
