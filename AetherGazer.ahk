@@ -1,4 +1,4 @@
-; ----------------------------------------------------------------------------
+﻿; ----------------------------------------------------------------------------
 ; Script Name: 深空之眼
 ; Version: 3.0
 ; Author: qstdnx
@@ -355,7 +355,25 @@ Press2()
 			{
 				FindText().Click(X, Y, "L")
 			}
+      ; 尝试选择印记筛选选项
 			Sleep, 500
+      Loop, 8
+      {
+          Send, {WheelDown}
+          Sleep, 100
+      }
+      Sleep, 500
+      Text:="|<>*192$41.000000000000003U0A000zTsQzw3wzkxzs71lUk1kA3X001UM760030ziAyDy1zQNwzw3ysktzs61lVnU0A3X3b00M767C10viACQ71zTsTsC3svkzkQ61k1lzs03U13zU000000000000000000000"
+			if (ok:=FindText(X, Y, 162-150000, 416-150000, 162+150000, 416+150000, 0, 0, Text))
+			{
+				FindText().Click(X, Y, "L")
+			}
+      else
+      {
+          ; 若找不到，使用固定坐标
+          Click, 331, 501
+      }
+      Sleep, 500
 			Click, 235, 702
 			Sleep, 500
 			Text:="|<>*117$71.0Dzzzzzzzza00jzzzzzzzzi00PzzzzzzzzA0MbzzzzzzzzM1kCzTzzzxzzk348gjzzzzzzUCE03DzzjzzzETU04Izzzzzy1zU0N3yzzzzw3y0Am5nzzzzt7zLng/zzzzzwTzzzTzzzzzyAzzzzzzzzzzwNTzzzzzzzzzvnzzzzzzzzzzmvzzzzzzzzzzpjzzzzzzzzzzbTzzzztzzzzzizzzzznzzzzzzzTzzzXzzvzzzzzzzy7zznzzzzzzzwDzzXzzzzzzzkDzz7zzTzzzvUTzy7zyzzzzq0zzwDzz"
@@ -471,8 +489,8 @@ Press2()
 			Send,   {Enter}
       Text := "|<>*202$39.zzzzzzzzzzzzzvzzzwzyA0DzbzkU1wwsz0TDbb7wU1wwszw0Dbb7kXtw00w40DU07kU0w00z4F7zbzsW1swwT4ED7bXsUEswwT07b7bXk3ws00QE03003nU0s00Tzzzzzbzzzzzzw"
 
-      ; 首次查找（等待模式，设置5秒超时）
-      ok := FindText(X:="wait", Y:=5000, 0, 0, 0, 0, 0, 0, Text)
+      ; 首次查找（等待模式，设置2秒超时）
+      ok := FindText(X:="wait", Y:=2, 0, 0, 0, 0, 0, 0, Text)
 
       if (ok)
       {
@@ -491,6 +509,9 @@ Press2()
       {
           ; 超时未找到，执行备用操作
           Send, {G}
+
+          ; 把鼠标移开，避免遮挡下一轮的查找
+          MouseMove, -100, -100
       }
 			Sleep, 1000
 		}
